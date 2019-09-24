@@ -29,13 +29,15 @@ print(soup.title.text)
 
 3
 
+
 exit_c = True
 dic = {1:'burger',2:'pizza',3:'friedchicken',4:'exit'}
 cst_choice = []
 
 def select_item():
   print('\n')
-  a = int(input('what do you want,1:burger,2:pizza,3:riedchicken,4:exit'))
+  a = int(input('''what do you want,1:burger,2:pizza,3:riedchicken,4:exit,
+  please select a number:'''))
   print ('\n')
   return a
 
@@ -48,4 +50,6 @@ while exit_c == True:
   else:
     break
 print(cst_choice)
+
+
 
