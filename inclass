@@ -13,3 +13,15 @@ title=[]
 for i in [urls]:
   title.append(get_title(i))
 print(title)
+
+
+2
+import requests
+from bs4 import BeautifulSoup
+r=requests.get('http://finance.yahoo.com')
+html_data=r.text
+print(html_data)
+
+soup=BeautifulSoup(html_data)
+print(soup.title)
+print(soup.title.text)
