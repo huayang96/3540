@@ -1,1 +1,15 @@
 
+1
+import requests
+from bs4 import BeautifulSoup
+
+def get_title(url):
+  r=requests.get(url)
+  html_data=r.text
+  soup=BeautifulSoup(html_data)
+  return soup.title.text
+uls=['http://finance.yahoo.com']
+title=[]
+for i in [urls]:
+  title.append(get_title(i))
+print(title)
