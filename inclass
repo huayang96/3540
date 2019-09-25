@@ -53,7 +53,7 @@ print(cst_choice)
 
 4
 logins = {'john':'john123','sue':'sue233'}
-employee={1:'john',2:'sue'}
+employee = {1:'john',2:'sue'}
 print(logins)
 print(logins.get('john'))
 print(logins['john'])
@@ -63,17 +63,26 @@ print(logins.keys())
 for n in logins:
   print(n,logins[n])
 
-stock_dic={'apple':12,'baba':23,'tencent':45,'taobao':56,'aa':45}
+stock_dic = {'apple':12,'baba':23,'tencent':45,'taobao':56,'aa':45}
 print(stock_dic)
-stock_list=[]
-stock_quantity=0
+stock_list = []
+stock_quantity = 0
 for n in stock_dic:
   stock_list.append(n)
-  stock_quantity+=stock_dic[n]
+  stock_quantity += stock_dic[n]
 print(stock_list)
 print(stock_dic['baba'])
 print(stock_dic['apple'])
 print(stock_dic['tencent'])
 print(stock_quantity)
+ 
+for y,a in stock_dic.items():
+  print(y,a)
+
+apt_rental = {'avalon':2000,'jp':2500,'alta':2300,'the one':5000,'cbb':20000}
+for k, v in apt_rental.items():
+  print('key'+k,v*1.2)
+
+
 
 
