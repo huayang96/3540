@@ -1,0 +1,29 @@
+import random
+balance =100000
+initial_balance = balance
+def get_bit_price():
+  price = random.randrange(1,2000)
+  return price
+def get_bit_num():
+  num = random.randrange(1,200)
+  return num
+buy = True
+sell = False
+def trade_process(buy_or_sell,bit_price,bit_num,balance):
+  if buy_or_sell:
+    balance -= bit_price * bit_num
+  else:
+    balance += bit_price *bit_num
+  return balance
+balance_history = []
+for i in range (100):
+  a = random.randrange(-100,100)
+  if a>0:
+    to_do =buy
+  else:
+    to_do =sell
+  balance =trade_process(to_do,get_bit_price(),get_bit_num(),balance)
+  balance_history.append(balance)
+print(balance_history)
+print(initial_balance)
+
