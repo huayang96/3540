@@ -1,0 +1,18 @@
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get('http://www.google.com')
+html_data =r.text
+google_soup = BeautifulSoup(html_data)
+title_list = []
+title_list.append(google_soup.title)
+
+bing_web = requests.get('https://www.bing.com/')
+bing_soup = BeautifulSoup(bing_web.text)
+title_list.append(bing_soup.title)
+
+yahoo_web = requests.get('https://www.yahoo.com')
+yahoo_soup = BeautifulSoup(yahoo_web.text)
+title_list.append(yahoo_soup.title)
+print(title_list)
+
