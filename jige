@@ -1,0 +1,49 @@
+# This dic may dynamic in the future
+our_product = {'bit_coin':1000,'yt_coin':2000}
+
+class client():
+  def __init__(self,client_id,client_name,total_cash,coin_asset):
+    self.client_id = client_id
+    self.client_name = client_name
+    self.total_cash = total_cash
+    self.coin_asset = coin_asset
+  def add_cash(self,number):
+    self.total_cash += number
+    return self.coin_asset
+  def buy_action(self,product_name,product_num,product_price):
+    if self.total_cash < product_price*product_num:
+      print('Sorry, Sir,you do not have enough money')
+      return 
+    self.total_cash -= product_price*product_num
+    if product_name not in self.coin_asset.keys():
+     self.coin_asset[product_name] = []
+     self.coin_asset[product_name].append(product_num) 
+     self.coin_asset[product_name].append(product_price*product_num)
+    else:
+      self.coin_asset[product_name][0] += product_num
+      self.coin_asset[product_name][1] += product_num*product_price    
+    return self.total_cash,self.coin_asset
+  def sell_action(self,product_name,product_num,product_price):
+    if product_num > self.coin_asset[product_name][0]:
+      print('Sorry, Sir you do not have enough coin')
+      return
+    self.total_cash += product_price*product_num
+    self.coin_asset[product_name][0] -= product_num
+    self.coin_asset[product_name][1] -= product_num*product_price    
+    return self.total_cash,self.coin_asset
+  def update_coin_price(self,new_price_dic):
+    for keys,values in new_price_dic.items():
+      if keys in self.coin_asset.keys():
+        self.coin_asset[keys][1] = self.coin_asset[keys][0] *values
+      else:
+        continue
+    return self
+
+#test code
+jige = client(1,'jichenxiang',1000000,{})
+jige.buy_action('bit_coin',11,our_product['bit_coin'])
+jige.buy_action('bit_coin',10,our_product['bit_coin'])
+jige.buy_action('yt_coin',10,our_product['bit_coin'])
+jige.sell_action('bit_coin',8,our_product['bit_coin'])
+jige.update_coin_price({'bit_coin':2000,'yt_coin':3000})
+print(jige.coin_asset)
