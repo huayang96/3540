@@ -38,12 +38,20 @@ class client():
       else:
         continue
     return self
-
+  def get_total_asset(self):
+    total_asset = self.total_cash
+    for k,v in self.coin_asset.items():
+      total_asset += self.coin_asset[k][1]
+    print('total_asset is '+ str(total_asset))
+    return total_asset
+  
 #test code
 jige = client(1,'jichenxiang',1000000,{})
-jige.buy_action('bit_coin',11,our_product['bit_coin'])
 jige.buy_action('bit_coin',10,our_product['bit_coin'])
-jige.buy_action('yt_coin',10,our_product['bit_coin'])
-jige.sell_action('bit_coin',8,our_product['bit_coin'])
+jige.buy_action('bit_coin',10,our_product['bit_coin'])
+jige.buy_action('yt_coin',20,our_product['yt_coin'])
+jige.sell_action('bit_coin',10,our_product['bit_coin'])
 jige.update_coin_price({'bit_coin':2000,'yt_coin':3000})
+jige.get_total_asset()
 print(jige.coin_asset)
+
