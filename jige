@@ -9,7 +9,7 @@ class client():
     self.coin_asset = coin_asset
   def add_cash(self,number):
     self.total_cash += number
-    return self.coin_asset
+    return self.total_cash
   def buy_action(self,product_name,product_num,product_price):
     if self.total_cash < product_price*product_num:
       print('Sorry, Sir,you do not have enough money')
