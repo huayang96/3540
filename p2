@@ -1,0 +1,107 @@
+
+our_product = {'bit_coin':1000,'yt_coin':2000}
+class client():
+  def __init__(self,client_id,client_name,total_cash,coin_asset):
+    self.client_id = client_id
+    self.client_name = client_name
+    self.total_cash = total_cash
+    self.coin_asset = coin_asset
+  def add_cash(self,number):
+    self.total_cash += number
+    return self.total_cash
+  def buy_action(self,product_name,product_num,product_price):
+    if self.total_cash < product_price*product_num:
+      print('Sorry, Sir,you do not have enough money')
+      return 
+    self.total_cash -= product_price*product_num
+    if product_name not in self.coin_asset.keys():
+     self.coin_asset[product_name] = []
+     self.coin_asset[product_name].append(product_num) 
+     self.coin_asset[product_name].append(product_price*product_num)
+    else:
+      self.coin_asset[product_name][0] += product_num
+      self.coin_asset[product_name][1] += product_num*product_price    
+    return self.total_cash,self.coin_asset
+  def sell_action(self,product_name,product_num,product_price):
+    if product_num > self.coin_asset[product_name][0]:
+      print('Sorry, Sir you do not have enough coin')
+      return
+    self.total_cash += product_price*product_num
+    self.coin_asset[product_name][0] -= product_num
+    self.coin_asset[product_name][1] -= product_num*product_price    
+    return self.total_cash,self.coin_asset
+  def update_coin_price(self,new_price_dic):
+    for keys,values in new_price_dic.items():
+      if keys in self.coin_asset.keys():
+        self.coin_asset[keys][1] = self.coin_asset[keys][0] *values
+      else:
+        continue
+    return self
+  def get_total_asset(self):
+    total_asset = self.total_cash
+    for k,v in self.coin_asset.items():
+      total_asset += self.coin_asset[k][1]
+    print('total_asset is '+ str(total_asset))
+    return total_asset
+
+class Trade():
+  def __init__(self,quan,price,symbol):
+    self.__quan = quan
+    self.__price = price
+    self.__symbol = symbol
+  def get_quan(self):
+    return self.__quan
+  def get_price(self):
+    return self.__price
+  def get_symbol(self):
+    return self.__symbol
+  def reset_quan(self,new_quan):
+    if new_quan >= 0:
+      self.__quan = new_quan
+  def reset_price(self,new_price):
+    if new_price >= 0:
+      self.__price = new_price
+  def get_value(self): 
+    return str(self.__quan * self.__price)+'lalal'
+
+class Blotter:
+  def __init__(self):
+    self.trades = []
+  def add_trade(self,t):
+    self.trades.append(t)
+  def new_trade(self,q,p,s):
+    if q > 0 and  p > 0:
+     t = Trade(q,p,s)
+     self.add_trade(t)
+  def add_trades(self,trades):
+    self.trades.extend(trades)
+  def print_trade(self):
+    for t in self.trades:
+      print(t.get_value())
+t1 = Trade(1000,20,'IBM')
+t2 = Trade(22,20,'IBM')
+t3 = Trade(333,20,'IBM')
+t4 = Trade(100440,20,'IBM')
+
+bbb = Blotter()
+bbb.add_trade(t1)
+bbb.new_trade(1,2,3)
+bbb.print_trade()
+
+aaa=bbb
+print(type(aaa))
+print(aaa.__dict__)
+for i in dir(aaa):
+  print(i)
+
+
+  
+#test code
+jige = client(1,'jichenxiang',1000000,{})
+jige.buy_action('bit_coin',10,our_product['bit_coin'])
+jige.buy_action('bit_coin',10,our_product['bit_coin'])
+jige.buy_action('yt_coin',20,our_product['yt_coin'])
+jige.sell_action('bit_coin',10,our_product['bit_coin'])
+jige.update_coin_price({'bit_coin':2000,'yt_coin':3000})
+jige.get_total_asset()
+print(jige.coin_asset)
